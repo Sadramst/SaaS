@@ -11,55 +11,61 @@ const placeholderVisuals: Visual[] = [
   {
     id: "1",
     name: "Mine Production Gantt",
+    slug: "mine-production-gantt",
     description: "Shift-level drill-down with crew and equipment breakdown.",
     category: "Production",
-    isPremium: false,
     requiredPlan: "Starter",
+    downloadCount: 120,
     tags: ["production", "gantt", "shift"],
   },
   {
     id: "2",
     name: "Equipment Utilisation Heatmap",
+    slug: "equipment-utilisation-heatmap",
     description: "Real-time OEE tracking across your fleet.",
     category: "Equipment",
-    isPremium: false,
     requiredPlan: "Starter",
+    downloadCount: 95,
     tags: ["equipment", "OEE", "heatmap"],
   },
   {
     id: "3",
     name: "Safety KPI Dashboard",
+    slug: "safety-kpi-dashboard",
     description: "Leading and lagging indicators with trend alerts.",
     category: "Safety",
-    isPremium: false,
     requiredPlan: "Starter",
+    downloadCount: 80,
     tags: ["safety", "KPI", "TRIFR"],
   },
   {
     id: "4",
     name: "Ore Grade Waterfall",
+    slug: "ore-grade-waterfall",
     description: "Grade tracking from bench to plant with variance analysis.",
     category: "Quality",
-    isPremium: true,
     requiredPlan: "Professional",
+    downloadCount: 60,
     tags: ["grade", "waterfall", "quality"],
   },
   {
     id: "5",
     name: "Cost Per Tonne Tracker",
+    slug: "cost-per-tonne-tracker",
     description: "Operational cost breakdown with anomaly flagging.",
     category: "Finance",
-    isPremium: true,
     requiredPlan: "Professional",
+    downloadCount: 45,
     tags: ["cost", "finance", "anomaly"],
   },
   {
     id: "6",
     name: "AI Natural Language Query",
+    slug: "ai-natural-language-query",
     description: 'Ask questions like "Why did Pit 3 underperform?" and get answers.',
     category: "AI",
-    isPremium: true,
     requiredPlan: "Enterprise",
+    downloadCount: 30,
     tags: ["AI", "NLP", "query"],
   },
 ];
@@ -96,7 +102,7 @@ export default function VisualsPage() {
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {visuals.map((visual) => (
-          <VisualCard key={visual.id} visual={visual} userPlan={user?.plan ?? "Free"} />
+          <VisualCard key={visual.id} visual={visual} userPlan={user?.subscriptionTier ?? "Free"} />
         ))}
       </div>
     </div>

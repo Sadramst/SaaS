@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const response = await fetch(`${apiUrl}/api/waitlist/subscribe`, {
+    const response = await fetch(`${apiUrl}/waitlist/subscribe`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, company, role, plan }),

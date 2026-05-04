@@ -157,8 +157,8 @@ export default function BlogPostPageClient({ slug }: { slug: string }) {
 
   const headings = post.content
     .split("\n")
-    .filter((line) => line.startsWith("## "))
-    .map((line) => ({
+    .filter((line: string) => line.startsWith("## "))
+    .map((line: string) => ({
       text: line.replace("## ", ""),
       id: line
         .replace("## ", "")
@@ -201,7 +201,7 @@ export default function BlogPostPageClient({ slug }: { slug: string }) {
                 <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">
                   Contents
                 </p>
-                {headings.map((h) => (
+                {headings.map((h: { id: string; text: string }) => (
                   <a
                     key={h.id}
                     href={`#${h.id}`}

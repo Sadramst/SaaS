@@ -1,16 +1,23 @@
 "use client";
 
-import { useAuth } from "@/hooks/useAuth";
+import { useAuthStore } from "@/stores/authStore";
 import ThemeToggle from "@/components/shared/ThemeToggle";
-import { Bell } from "lucide-react";
+import { Bell, Menu } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
-export default function TopBar() {
-  const { user } = useAuth();
+interface TopBarProps {
+  onMenuClick?: () => void;
+}
+
+export default function DashboardTopBar({ onMenuClick }: TopBarProps) {
+  const user = useAuthStore((s) => s.user);
 
   return (
-    <header className="flex h-16 items-center justify-between border-b border-gray-200 bg-white px-6 dark:border-gray-800 dark:bg-gray-950">
-      <div>
+    <header className="flex h-16 items-center justify-between border-b border-gray-200 bg-white px-4 sm:px-6 dark:border-gray-800 dark:bg-gray-950">
+      <div className="flex items-center gap-3">
+        <button onClick={onMenuClick} className="lg:hidden" aria-label="Open menu">
+          <Menu className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+        </button>
         <h1 className="text-lg font-semibold text-gray-900 dark:text-white">
           Welcome back{user?.firstName ? `, ${user.firstName}` : ""}
         </h1>

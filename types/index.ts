@@ -1,6 +1,22 @@
+export interface ApiResponse<T> {
+  success: boolean;
+  message?: string;
+  data?: T;
+  errors?: string[];
+}
+
+export interface PagedResult<T> {
+  items: T[];
+  totalCount: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+}
+
 export interface AuthResponse {
   token: string;
   refreshToken: string;
+  expiresAt: string;
   user: UserDto;
 }
 
@@ -12,25 +28,33 @@ export interface UserDto {
   company?: string;
   phone?: string;
   role: string;
-  plan: string;
+  subscriptionTier: string;
+  createdAt: string;
 }
 
 export interface LoginRequest {
   email: string;
   password: string;
+  rememberMe?: boolean;
 }
 
 export interface RegisterRequest {
   firstName: string;
   lastName: string;
   email: string;
-  company: string;
-  phone: string;
+  company?: string;
+  phone?: string;
   password: string;
 }
 
 export interface ForgotPasswordRequest {
   email: string;
+}
+
+export interface ResetPasswordRequest {
+  token: string;
+  newPassword: string;
+  confirmPassword: string;
 }
 
 export interface WaitlistRequest {
@@ -42,10 +66,11 @@ export interface WaitlistRequest {
 
 export interface WaitlistResponse {
   position: number;
+  totalCount: number;
   message: string;
 }
 
-export interface BlogPost {
+export interface BlogPostDto {
   id: string;
   title: string;
   slug: string;
@@ -55,35 +80,28 @@ export interface BlogPost {
   author: string;
   publishedAt: string;
   readTimeMinutes: number;
-  imageUrl?: string;
+  thumbnailUrl?: string;
   tags: string[];
 }
 
-export interface PagedResult<T> {
-  items: T[];
-  totalCount: number;
-  page: number;
-  pageSize: number;
-  totalPages: number;
-}
-
-export interface UserProfile {
-  id: string;
-  firstName: string;
-  lastName: string;
+export interface ContactRequest {
+  name: string;
   email: string;
   company?: string;
-  phone?: string;
-  role: string;
-  createdAt: string;
-  subscriptionPlan: string;
+  subject?: string;
+  message: string;
 }
-
 export interface UpdateProfileRequest {
   firstName: string;
   lastName: string;
   company?: string;
   phone?: string;
+}
+
+export interface ChangePasswordRequest {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
 }
 
 export interface SubscriptionInfo {
@@ -107,13 +125,21 @@ export interface PlanDto {
 export interface Visual {
   id: string;
   name: string;
+  slug: string;
   description: string;
   category: string;
   thumbnailUrl?: string;
   downloadUrl?: string;
-  isPremium: boolean;
   requiredPlan: string;
+  downloadCount: number;
   tags: string[];
+}
+
+export interface VisualDetailDto extends Visual {
+  fullDescription: string;
+  previewImageUrls: string[];
+  technicalSpecs: string;
+  dataRequirements: string;
 }
 
 export interface ContactRequest {
@@ -124,12 +150,7 @@ export interface ContactRequest {
   message: string;
 }
 
-export interface ApiResponse<T> {
-  success: boolean;
-  message?: string;
-  data?: T;
-  errors?: string[];
-}
+export type BlogPost = BlogPostDto;
 
 export interface FAQItem {
   question: string;
