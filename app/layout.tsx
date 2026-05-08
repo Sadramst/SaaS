@@ -12,11 +12,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.appilico.com"),
   title: {
-    default: "Appilico — AI-Powered Analytics for Australian Mining & Resources",
+    default: "Appilico OS — Operational Intelligence for Australian Mining & Resources",
     template: "%s | Appilico",
   },
   description:
-    "Connect your operational data to Power BI and get executive-ready visuals with AI insights — in minutes. Built for Australian mining and resources.",
+    "8 configurable modules for mine production, equipment, safety, cost, grade, energy, workforce, and supply chain analytics. AI-powered. Built in Australia.",
   openGraph: {
     siteName: "Appilico",
     type: "website",

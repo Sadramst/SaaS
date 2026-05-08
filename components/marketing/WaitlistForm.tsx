@@ -1,12 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
-import { useWaitlist } from "@/hooks/useWaitlist";
+import { waitlistApi } from "@/lib/api/waitlist";
 import { CheckCircle, Loader2 } from "lucide-react";
 
 const waitlistSchema = z.object({
@@ -21,7 +22,10 @@ interface WaitlistFormProps {
 }
 
 export default function WaitlistForm({ onClose, isModal = false }: WaitlistFormProps) {
-  const { subscribe, loading, success, error, reset } = useWaitlist();
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   const {
     register,
     handleSubmit,
@@ -31,7 +35,16 @@ export default function WaitlistForm({ onClose, isModal = false }: WaitlistFormP
   });
 
   const onSubmit = async (data: WaitlistFormData) => {
-    await subscribe({ email: data.email });
+    setLoading(true);
+    setError(null);
+    try {
+      await waitlistApi.subscribe({ email: data.email });
+      setSuccess(true);
+    } catch {
+      setError("Failed to join waitlist. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (success) {
@@ -47,7 +60,7 @@ export default function WaitlistForm({ onClose, isModal = false }: WaitlistFormP
           We&apos;ll be in touch when we&apos;re ready to onboard founding members.
         </p>
         {isModal && onClose && (
-          <Button variant="outline" onClick={() => { reset(); onClose(); }}>
+          <Button variant="outline" onClick={() => { setSuccess(false); onClose(); }}>
             Close
           </Button>
         )}

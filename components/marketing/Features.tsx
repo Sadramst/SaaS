@@ -1,53 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  BarChart3,
-  Cpu,
-  Shield,
-  TrendingDown,
-  DollarSign,
-  MessageSquare,
-} from "lucide-react";
-
-const features = [
-  {
-    icon: BarChart3,
-    title: "Mine Production Gantt",
-    description:
-      "Shift-level drill-down with crew and equipment breakdown. See exactly who produced what, when.",
-  },
-  {
-    icon: Cpu,
-    title: "Equipment Utilisation Heatmap",
-    description:
-      "Real-time OEE tracking across your entire fleet. Spot underperformers instantly.",
-  },
-  {
-    icon: Shield,
-    title: "Safety KPI Dashboard",
-    description:
-      "Leading and lagging indicators with trend alerts. Stay ahead of safety risks.",
-  },
-  {
-    icon: TrendingDown,
-    title: "Ore Grade Waterfall",
-    description:
-      "Grade tracking from bench to plant with variance analysis. Know where value is lost.",
-  },
-  {
-    icon: DollarSign,
-    title: "Cost Per Tonne Tracker",
-    description:
-      "Operational cost breakdown with anomaly flagging. Control costs in real time.",
-  },
-  {
-    icon: MessageSquare,
-    title: "AI Natural Language Query",
-    description:
-      'Ask "Why did Pit 3 underperform Tuesday?" and get an answer backed by your data.',
-  },
-];
+import { platformModules } from "@/data/modules";
+import { cn } from "@/lib/utils";
 
 export default function Features() {
   return (
@@ -60,33 +15,52 @@ export default function Features() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
-            Purpose-Built for Mining Operations
+          <span className="inline-block rounded-full bg-[#0070C0]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-[#0070C0]">
+            8 Configurable Modules
+          </span>
+          <h2 className="mt-4 text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
+            One Platform. Every Operational Dimension.
           </h2>
-          <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
-            Every visual is designed by mining analytics experts. No generic templates.
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-500 dark:text-gray-400">
+            Pick the modules you need. Start with one, scale to all eight.
+            Each includes configurable dashboards, data ingestion, alerts, reports, and AI.
           </p>
         </motion.div>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature, index) => (
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {platformModules.map((mod, index) => (
             <motion.div
-              key={feature.title}
-              className="group rounded-xl border border-gray-200 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:border-gray-800 dark:bg-gray-900"
+              key={mod.id}
+              className="group rounded-xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:border-gray-800 dark:bg-gray-900"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
             >
-              <div className="mb-4 inline-flex rounded-lg bg-[#0070C0]/10 p-3">
-                <feature.icon className="h-6 w-6 text-[#0070C0]" />
+              <div
+                className={cn("mb-4 inline-flex rounded-lg p-3")}
+                style={{ backgroundColor: `${mod.color}15` }}
+              >
+                <mod.icon className="h-6 w-6" style={{ color: mod.color }} />
               </div>
-              <h3 className="mb-2 text-lg font-bold text-gray-900 dark:text-white">
-                {feature.title}
+              <h3 className="mb-1 text-base font-bold text-gray-900 dark:text-white">
+                {mod.shortName}
               </h3>
-              <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-                {feature.description}
+              <p className="mb-3 text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                {mod.description.split(".")[0]}.
               </p>
+              <div className="flex items-center gap-2">
+                <span
+                  className={cn(
+                    "rounded px-2 py-0.5 text-[10px] font-semibold uppercase",
+                    mod.requiredPlan === "Starter" && "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+                    mod.requiredPlan === "Professional" && "bg-purple-50 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
+                    mod.requiredPlan === "Enterprise" && "bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
+                  )}
+                >
+                  {mod.requiredPlan}+
+                </span>
+              </div>
             </motion.div>
           ))}
         </div>

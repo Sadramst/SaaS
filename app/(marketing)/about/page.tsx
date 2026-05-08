@@ -5,7 +5,7 @@ import WaitlistForm from "@/components/marketing/WaitlistForm";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Appilico builds AI-powered analytics tools for Australia's mining industry. Based in Perth, WA.",
+    "Appilico OS — the operational intelligence platform for Australian mining. 8 configurable modules, AI-powered. Based in Perth, WA.",
 };
 
 const values = [
@@ -38,8 +38,8 @@ export default function AboutPage() {
         <div className="mx-auto max-w-4xl px-4">
           <h1 className="text-4xl font-extrabold sm:text-5xl">About Appilico</h1>
           <p className="mt-4 text-lg text-gray-300">
-            We build the analytics tools that Australia&apos;s mining industry deserves — modern,
-            AI-powered, and built by engineers who understand enterprise operations.
+            We build Appilico OS — the operational intelligence platform Australia&apos;s mining
+            industry deserves. 8 modules, AI-powered, built by engineers who live and breathe operations.
           </p>
         </div>
       </section>
@@ -50,9 +50,9 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Our Mission</h2>
             <p className="mt-6 text-lg leading-relaxed text-gray-600 dark:text-gray-400">
               The mining industry generates more data than almost any other sector — yet most
-              operations still rely on manual reports and outdated dashboards. Appilico bridges the
-              gap between raw operational data and executive-level insights, using AI and Power BI to
-              deliver analytics that are purpose-built for mining operations.
+              operations still rely on manual reports and outdated dashboards. Appilico OS bridges the
+              gap between raw operational data and executive-level insights with 8 configurable modules
+              covering production, equipment, safety, cost, grade, energy, workforce, and supply chain.
             </p>
           </div>
         </div>
@@ -120,8 +120,8 @@ export default function AboutPage() {
 
       <section className="bg-[#1F3864] py-16">
         <div className="mx-auto max-w-xl px-4 text-center">
-          <h2 className="text-2xl font-bold text-white">Want to learn more?</h2>
-          <p className="mt-3 text-gray-300">Join the waitlist to be first in line.</p>
+          <h2 className="text-2xl font-bold text-white">Ready to try Appilico OS?</h2>
+          <p className="mt-3 text-gray-300">Start your 14-day free trial — no credit card required.</p>
           <div className="mt-6">
             <WaitlistForm />
           </div>

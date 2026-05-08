@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import api from "@/lib/api";
+import { subscriptionsApi } from "@/lib/api/subscriptions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import type { SubscriptionInfo, ApiResponse } from "@/types";
+import type { SubscriptionInfo } from "@/types";
 import { CreditCard, Calendar, ArrowUpRight } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 
@@ -12,11 +12,11 @@ export default function BillingPage() {
   const [subscription, setSubscription] = useState<SubscriptionInfo | null>(null);
 
   useEffect(() => {
-    api
-      .get<ApiResponse<SubscriptionInfo>>("/api/subscription/current")
+    subscriptionsApi
+      .getCurrent()
       .then((res) => {
-        if (res.data.success && res.data.data) {
-          setSubscription(res.data.data);
+        if (res.success && res.data) {
+          setSubscription(res.data);
         }
       })
       .catch(() => {

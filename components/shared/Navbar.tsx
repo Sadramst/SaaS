@@ -42,6 +42,7 @@ export default function Navbar() {
           <span className="text-2xl font-bold text-[#1F3864] dark:text-white">
             Appilico
           </span>
+          <span className="rounded bg-[#0070C0]/10 px-1.5 py-0.5 text-[10px] font-bold uppercase text-[#0070C0]">OS</span>
         </Link>
 
         <div className="hidden items-center gap-1 md:flex">

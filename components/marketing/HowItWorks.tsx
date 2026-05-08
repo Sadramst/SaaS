@@ -9,21 +9,21 @@ const steps = [
     step: "01",
     title: "Connect your data",
     description:
-      "Point Appilico at your existing data source — SQL Server, CSV, Azure, SAP. We handle the integration.",
+      "Point Appilico OS at your existing data source — SQL Server, CSV, Azure, SAP, or fleet management system. We handle integration.",
   },
   {
     icon: LayoutDashboard,
     step: "02",
-    title: "Choose your visuals",
+    title: "Pick your modules",
     description:
-      "Select from our mining-specific visual library — pre-configured for your KPIs. No development needed.",
+      "Enable the modules you need — production, equipment, safety, cost, grade, energy, workforce, or supply chain. Start with one, add more any time.",
   },
   {
     icon: Sparkles,
     step: "03",
     title: "Get AI insights",
     description:
-      "Your Power BI dashboard is live with AI anomaly detection from day one. Insights, not just data.",
+      "Your operational dashboards are live with AI anomaly detection from day one. Ask questions in plain English and get answers backed by your data.",
   },
 ];
 
@@ -39,10 +39,10 @@ export default function HowItWorks() {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
-            Live in Three Simple Steps
+            Go Live in Three Steps
           </h2>
           <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
-            From data source to executive dashboard in minutes, not months.
+            From data source to operational intelligence in minutes, not months.
           </p>
         </motion.div>
 

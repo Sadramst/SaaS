@@ -9,49 +9,52 @@ import { cn } from "@/lib/utils";
 const tiers = [
   {
     name: "Starter",
-    monthlyPrice: 299,
-    annualPrice: 249,
-    description: "For small operations getting started with analytics.",
+    monthlyPrice: 499,
+    annualPrice: 416,
+    description: "1 module. Perfect for teams getting started with operational analytics.",
     features: [
-      "Up to 5 visuals",
-      "1 data source connection",
+      "1 module of your choice",
+      "Up to 10 users",
+      "Daily data refresh",
+      "CSV & Excel upload",
+      "Standard dashboards",
       "Email support",
-      "Standard refresh rate",
-      "Basic reporting",
+      "14-day free trial",
     ],
     isPopular: false,
   },
   {
     name: "Professional",
-    monthlyPrice: 499,
-    annualPrice: 416,
-    description: "For growing operations that need AI-powered insights.",
+    monthlyPrice: 999,
+    annualPrice: 833,
+    description: "3 modules + AI. For operations scaling analytics across departments.",
     features: [
-      "Up to 15 visuals",
-      "3 data source connections",
-      "AI natural language query",
-      "Priority support",
+      "Up to 3 modules",
+      "Up to 50 users",
       "Hourly data refresh",
+      "API connectors (Pitram, Wenco, SAP)",
+      "AI natural language queries",
       "Anomaly detection alerts",
       "Custom branding",
+      "Priority support",
     ],
     isPopular: true,
   },
   {
     name: "Enterprise",
-    monthlyPrice: 799,
-    annualPrice: 666,
-    description: "For large operations with complex analytics needs.",
+    monthlyPrice: 1999,
+    annualPrice: 1666,
+    description: "All 8 modules + SSO + SLA. For large operations with complex needs.",
     features: [
-      "Unlimited visuals",
-      "Unlimited data sources",
-      "Full AI suite",
-      "Dedicated onboarding",
-      "SLA guarantee",
+      "All 8 modules",
+      "Unlimited users",
       "Real-time data refresh",
-      "API access",
-      "SSO integration",
+      "Full AI suite + Copilot",
+      "SSO (SAML/OIDC)",
+      "SLA guarantee (99.9%)",
+      "Dedicated onboarding",
       "Custom visual development",
+      "API access",
     ],
     isPopular: false,
   },
@@ -76,10 +79,10 @@ export default function Pricing({ onOpenWaitlist, showToggle = true }: PricingPr
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
-            Simple, Transparent Pricing
+            Simple, Transparent Pricing in AUD
           </h2>
           <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
-            No hidden fees. No long-term contracts. Cancel any time.
+            No hidden fees. No long-term contracts. 14-day free trial on all plans.
           </p>
 
           {showToggle && (
@@ -133,8 +136,9 @@ export default function Pricing({ onOpenWaitlist, showToggle = true }: PricingPr
               <h3 className="text-xl font-bold text-gray-900 dark:text-white">{tier.name}</h3>
               <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">{tier.description}</p>
               <div className="mt-6">
+                <span className="text-sm text-gray-500">A$</span>
                 <span className="text-4xl font-extrabold text-gray-900 dark:text-white">
-                  ${annual ? tier.annualPrice : tier.monthlyPrice}
+                  {annual ? tier.annualPrice : tier.monthlyPrice}
                 </span>
                 <span className="text-gray-500 dark:text-gray-400">/month</span>
               </div>
@@ -151,15 +155,14 @@ export default function Pricing({ onOpenWaitlist, showToggle = true }: PricingPr
                 variant={tier.isPopular ? "default" : "outline"}
                 onClick={onOpenWaitlist}
               >
-                Join Waitlist
+                Start Free Trial
               </Button>
             </motion.div>
           ))}
         </div>
 
         <p className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
-          Founding member pricing — locked for your first 12 months when you join the waitlist
-          today.
+          All prices in Australian Dollars (AUD). Founding member pricing — locked for your first 12 months.
         </p>
       </div>
     </section>

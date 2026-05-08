@@ -4,7 +4,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import api from "@/lib/api";
+import { contactApi } from "@/lib/api/contact";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
@@ -36,8 +37,9 @@ export default function ContactPageClient() {
   const onSubmit = async (data: ContactFormData) => {
     setServerError(null);
     try {
-      await api.post("/api/contact", data);
+      await contactApi.submit(data);
       setSubmitted(true);
+      toast.success("Message sent successfully!");
     } catch {
       setServerError("Failed to send message. Please try again.");
     }

@@ -10,24 +10,26 @@ import WaitlistForm from "@/components/marketing/WaitlistForm";
 import Link from "next/link";
 
 const tiers = [
-  { name: "Starter", monthlyPrice: 299, annualPrice: 249, isPopular: false },
-  { name: "Professional", monthlyPrice: 499, annualPrice: 416, isPopular: true },
-  { name: "Enterprise", monthlyPrice: 799, annualPrice: 666, isPopular: false },
+  { name: "Starter", monthlyPrice: 499, annualPrice: 416, isPopular: false },
+  { name: "Professional", monthlyPrice: 999, annualPrice: 833, isPopular: true },
+  { name: "Enterprise", monthlyPrice: 1999, annualPrice: 1666, isPopular: false },
 ];
 
 const comparisonFeatures = [
-  { name: "Number of visuals", starter: "Up to 5", professional: "Up to 15", enterprise: "Unlimited" },
-  { name: "Data source connections", starter: "1", professional: "3", enterprise: "Unlimited" },
+  { name: "Modules included", starter: "1", professional: "Up to 3", enterprise: "All 8" },
+  { name: "Users", starter: "Up to 10", professional: "Up to 50", enterprise: "Unlimited" },
   { name: "Data refresh rate", starter: "Daily", professional: "Hourly", enterprise: "Real-time" },
+  { name: "Data ingestion", starter: "CSV / Excel", professional: "API connectors", enterprise: "API + IoT streaming" },
   { name: "AI natural language query", starter: false, professional: true, enterprise: true },
   { name: "Anomaly detection", starter: false, professional: true, enterprise: true },
+  { name: "Predictive maintenance", starter: false, professional: false, enterprise: true },
   { name: "Custom branding", starter: false, professional: true, enterprise: true },
   { name: "Email support", starter: true, professional: true, enterprise: true },
   { name: "Priority support", starter: false, professional: true, enterprise: true },
   { name: "Dedicated onboarding", starter: false, professional: false, enterprise: true },
-  { name: "SLA guarantee", starter: false, professional: false, enterprise: true },
+  { name: "SLA guarantee (99.9%)", starter: false, professional: false, enterprise: true },
   { name: "API access", starter: false, professional: false, enterprise: true },
-  { name: "SSO integration", starter: false, professional: false, enterprise: true },
+  { name: "SSO (SAML/OIDC)", starter: false, professional: false, enterprise: true },
   { name: "Custom visual development", starter: false, professional: false, enterprise: true },
 ];
 
@@ -58,9 +60,9 @@ export default function PricingPageClient() {
     <div className="pt-16">
       <section className="bg-gradient-to-b from-[#1F3864] to-[#162d52] py-20 text-center text-white">
         <div className="mx-auto max-w-4xl px-4">
-          <h1 className="text-4xl font-extrabold sm:text-5xl">Simple, Transparent Pricing</h1>
+          <h1 className="text-4xl font-extrabold sm:text-5xl">Simple, Transparent Pricing in AUD</h1>
           <p className="mt-4 text-lg text-gray-300">
-            No hidden fees. No long-term contracts. Cancel any time.
+            No hidden fees. No long-term contracts. 14-day free trial on all plans.
           </p>
         </div>
       </section>
@@ -112,7 +114,8 @@ export default function PricingPageClient() {
                 )}
                 <h3 className="text-xl font-bold">{tier.name}</h3>
                 <div className="mt-4">
-                  <span className="text-4xl font-extrabold">${annual ? tier.annualPrice : tier.monthlyPrice}</span>
+                  <span className="text-sm text-gray-500">A$</span>
+                  <span className="text-4xl font-extrabold">{annual ? tier.annualPrice : tier.monthlyPrice}</span>
                   <span className="text-gray-500">/month</span>
                 </div>
                 <Button
@@ -120,14 +123,14 @@ export default function PricingPageClient() {
                   variant={tier.isPopular ? "default" : "outline"}
                   onClick={() => setWaitlistOpen(true)}
                 >
-                  Join Waitlist
+                  Start Free Trial
                 </Button>
               </motion.div>
             ))}
           </div>
 
           <p className="mt-6 text-center text-sm text-gray-500">
-            Founding member pricing — locked for your first 12 months.
+            All prices in Australian Dollars (AUD). Founding member pricing — locked for your first 12 months.
           </p>
         </div>
       </section>

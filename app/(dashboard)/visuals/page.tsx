@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import api from "@/lib/api";
-import { useAuth } from "@/hooks/useAuth";
+import { visualsApi } from "@/lib/api/visuals";
+import { useAuthStore } from "@/stores/authStore";
 import VisualCard from "@/components/dashboard/VisualCard";
 import LoadingSpinner from "@/components/shared/LoadingSpinner";
-import type { Visual, ApiResponse } from "@/types";
+import type { Visual } from "@/types";
 
 const placeholderVisuals: Visual[] = [
   {
@@ -71,16 +71,16 @@ const placeholderVisuals: Visual[] = [
 ];
 
 export default function VisualsPage() {
-  const { user } = useAuth();
+  const user = useAuthStore((s) => s.user);
   const [visuals, setVisuals] = useState<Visual[]>(placeholderVisuals);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api
-      .get<ApiResponse<Visual[]>>("/api/visuals")
+    visualsApi
+      .getVisuals()
       .then((res) => {
-        if (res.data.success && res.data.data && res.data.data.length > 0) {
-          setVisuals(res.data.data);
+        if (res.success && res.data && res.data.length > 0) {
+          setVisuals(res.data);
         }
       })
       .catch(() => {

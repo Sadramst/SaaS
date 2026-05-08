@@ -1,8 +1,10 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Cloud, BarChart3, MapPin, HardHat } from "lucide-react";
+import Link from "next/link";
 
 const trustBadges = [
   { icon: Cloud, label: "Built on Azure" },
@@ -11,11 +13,52 @@ const trustBadges = [
   { icon: HardHat, label: "Mining Industry Specialist" },
 ];
 
+const typingWords = [
+  "mine production",
+  "equipment OEE",
+  "safety KPIs",
+  "ore grade",
+  "cost per tonne",
+  "energy & emissions",
+  "workforce rosters",
+  "supply chain",
+];
+
 interface HeroProps {
   onOpenWaitlist: () => void;
 }
 
 export default function Hero({ onOpenWaitlist }: HeroProps) {
+  const [wordIndex, setWordIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentWord = typingWords[wordIndex];
+    const speed = isDeleting ? 40 : 80;
+
+    if (!isDeleting && displayText === currentWord) {
+      const timeout = setTimeout(() => setIsDeleting(true), 2000);
+      return () => clearTimeout(timeout);
+    }
+
+    if (isDeleting && displayText === "") {
+      setIsDeleting(false);
+      setWordIndex((prev) => (prev + 1) % typingWords.length);
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      setDisplayText(
+        isDeleting
+          ? currentWord.substring(0, displayText.length - 1)
+          : currentWord.substring(0, displayText.length + 1)
+      );
+    }, speed);
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, wordIndex]);
+
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden bg-gradient-to-br from-[#1F3864] via-[#162d52] to-[#0d1b33]">
       <div className="absolute inset-0 opacity-20">
@@ -30,22 +73,31 @@ export default function Hero({ onOpenWaitlist }: HeroProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
+          <div>
+            <span className="inline-block rounded-full border border-[#0070C0]/40 bg-[#0070C0]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-[#0070C0]">
+              Appilico OS — Operational Intelligence Platform
+            </span>
+          </div>
           <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-            AI-Powered Analytics for Australian Mining &amp; Resources
+            One platform to track your{" "}
+            <span className="text-[#0070C0]">
+              {displayText}
+              <span className="animate-pulse">|</span>
+            </span>
           </h1>
           <p className="max-w-2xl text-lg leading-relaxed text-gray-300 sm:text-xl">
-            Stop waiting months for custom dashboards. Connect your operational data to Power BI and
-            get executive-ready visuals with AI insights — in minutes.
+            8 configurable modules. AI-powered insights. Built for Australian mining &amp; resources.
+            Connect your operational data and get executive-ready dashboards — in minutes, not months.
           </p>
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
             <Button size="lg" onClick={onOpenWaitlist}>
-              Join the Waitlist
+              Start 14-Day Free Trial
             </Button>
-            <a href="#how-it-works">
+            <Link href="/dashboard/analytics">
               <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 hover:text-white">
-                See How It Works
+                Try the Demo
               </Button>
-            </a>
+            </Link>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-6 pt-4 lg:justify-start">
@@ -70,7 +122,7 @@ export default function Hero({ onOpenWaitlist }: HeroProps) {
                 <div className="h-3 w-3 rounded-full bg-red-500" />
                 <div className="h-3 w-3 rounded-full bg-yellow-500" />
                 <div className="h-3 w-3 rounded-full bg-green-500" />
-                <span className="ml-2 text-xs text-gray-500">Production Dashboard</span>
+                <span className="ml-2 text-xs text-gray-500">Appilico OS — Production Module</span>
               </div>
               <div className="space-y-3">
                 <div className="flex items-end gap-2">
@@ -88,7 +140,7 @@ export default function Hero({ onOpenWaitlist }: HeroProps) {
                   {[
                     { label: "OEE", value: "87.3%" },
                     { label: "Tonnes/hr", value: "2,450" },
-                    { label: "Cost/t", value: "$12.80" },
+                    { label: "Cost/t", value: "A$12.80" },
                   ].map((metric) => (
                     <div key={metric.label} className="rounded-lg bg-gray-800 p-3 text-center">
                       <p className="text-xs text-gray-500">{metric.label}</p>

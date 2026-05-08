@@ -10,44 +10,44 @@ import {
 
 const faqs = [
   {
-    question: "What data sources does Appilico connect to?",
+    question: "What data sources does Appilico OS connect to?",
     answer:
-      "Appilico connects to SQL Server, Azure SQL, CSV/Excel files, SAP, Oracle, and most ODBC-compatible data sources. If you have a specific system, contact us and we'll confirm compatibility.",
+      "Appilico OS connects to SQL Server, Azure SQL, CSV/Excel files, SAP, Oracle, fleet management systems (Wenco, Modular, MineStar), and most ODBC-compatible data sources. Contact us if you have a specific system.",
   },
   {
-    question: "Do I need a Power BI licence?",
+    question: "How does the module-based pricing work?",
     answer:
-      "For basic viewing, no — we provide embedded dashboards via our platform. If you want to use Power BI Desktop for advanced customisation, a Power BI Pro or Premium Per User licence from Microsoft is recommended ($9.99–$20/user/month).",
+      "You choose the modules you need. Starter (A$499/mo) includes 1 module. Professional (A$999/mo) includes up to 3 modules. Enterprise (A$1,999/mo) unlocks all 8 modules plus dedicated onboarding and SLA. All prices are in Australian Dollars.",
+  },
+  {
+    question: "Is there a free trial?",
+    answer:
+      "Yes — every plan includes a 14-day free trial with full access. No credit card required to start. Cancel anytime during the trial and you won't be charged.",
   },
   {
     question: "How long does setup take?",
     answer:
-      "Most customers are live within 24 hours. If your data is in a standard SQL Server or Azure database, you can connect and see your first dashboard in under 30 minutes.",
+      "Most customers are live within 24 hours. If your data is in a standard SQL Server or Azure database, you can connect and see your first module dashboard in under 30 minutes.",
   },
   {
     question: "Is my operational data secure?",
     answer:
-      "Absolutely. All data is encrypted in transit (TLS 1.3) and at rest (AES-256). We are hosted on Microsoft Azure in the Australia East region with SOC 2 compliance. Your data never leaves Australian borders.",
+      "All data is encrypted in transit (TLS 1.3) and at rest (AES-256). Hosted on Microsoft Azure in the Australia East region with SOC 2 compliance. Your data never leaves Australian borders.",
   },
   {
-    question: "Can I customise the visuals for my site?",
+    question: "Can I add more modules later?",
     answer:
-      "Yes. While our visuals come pre-configured for common mining KPIs, you can customise colours, filters, drill-through paths, and calculated measures. Enterprise customers get fully custom visual development.",
+      "Absolutely. Start with one module and add more at any time. Upgrading your plan automatically unlocks additional modules — no migration or data loss.",
   },
   {
-    question: "What's the difference between tiers?",
+    question: "What are the 8 modules?",
     answer:
-      "Starter gives you up to 5 pre-built visuals with 1 data source. Professional adds AI-powered natural language queries, anomaly detection, and up to 15 visuals with 3 data sources. Enterprise removes all limits and includes dedicated onboarding and SLA.",
+      "Mine Production, Equipment OEE, Safety KPIs, Ore Grade & Recovery, Cost Analytics, Energy & Emissions, Workforce Management, and Supply Chain. Each module includes purpose-built dashboards, AI anomaly detection, and configurable alerts.",
   },
   {
-    question: "When will Appilico launch?",
+    question: "What industries does Appilico OS serve?",
     answer:
-      "We are currently in a controlled rollout with founding members from the Western Australian mining industry. Join the waitlist to secure your spot and founding member pricing (locked for 12 months).",
-  },
-  {
-    question: "What industries does Appilico serve?",
-    answer:
-      "Our initial focus is the Australian mining and resources sector — including gold, iron ore, lithium, nickel, and coal operations. Our visuals are purpose-built for the KPIs that matter in mining: production, equipment utilisation, safety, and cost per tonne.",
+      "Our initial focus is the Australian mining and resources sector — gold, iron ore, lithium, nickel, and coal operations. Our modules are purpose-built for mining KPIs across the full value chain.",
   },
 ];
 

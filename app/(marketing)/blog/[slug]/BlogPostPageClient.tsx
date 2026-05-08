@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
-import api from "@/lib/api";
+import { blogApi } from "@/lib/api/blog";
 import { formatDate } from "@/lib/utils";
 import LoadingSpinner from "@/components/shared/LoadingSpinner";
 import type { BlogPost, ApiResponse } from "@/types";
@@ -127,11 +127,11 @@ export default function BlogPostPageClient({ slug }: { slug: string }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api
-      .get<ApiResponse<BlogPost>>(`/api/blog/posts/${slug}`)
+    blogApi
+      .getPost(slug)
       .then((res) => {
-        if (res.data.success && res.data.data) {
-          setPost(res.data.data);
+        if (res.success && res.data) {
+          setPost(res.data);
         } else {
           setPost(placeholderContent[slug] ?? null);
         }

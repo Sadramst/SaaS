@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import BlogPostPageClient from "./BlogPostPageClient";
-import api from "@/lib/api";
 import type { ApiResponse, BlogPost } from "@/types";
 
 interface Props {
@@ -11,7 +10,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/blog/posts/${slug}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/blog/posts/${slug}`,
       { next: { revalidate: 3600 } }
     );
     if (res.ok) {

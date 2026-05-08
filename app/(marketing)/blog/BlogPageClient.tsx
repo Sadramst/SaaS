@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import api from "@/lib/api";
+import { blogApi } from "@/lib/api/blog";
 import { formatDate } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 import type { BlogPost, ApiResponse, PagedResult } from "@/types";
@@ -55,11 +55,11 @@ export default function BlogPageClient() {
   const [activeCategory, setActiveCategory] = useState("All");
 
   useEffect(() => {
-    api
-      .get<ApiResponse<PagedResult<BlogPost>>>("/api/blog/posts")
+    blogApi
+      .getPosts()
       .then((res) => {
-        if (res.data.success && res.data.data && res.data.data.items.length > 0) {
-          setPosts(res.data.data.items);
+        if (res.success && res.data && res.data.items.length > 0) {
+          setPosts(res.data.items);
         }
       })
       .catch(() => {

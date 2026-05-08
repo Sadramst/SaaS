@@ -4,13 +4,15 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useAuth } from "@/hooks/useAuth";
-import api from "@/lib/api";
+import { toast } from "sonner";
+import { useAuthStore } from "@/stores/authStore";
+import apiClient from "@/lib/api/client";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
-import { Loader2, CheckCircle } from "lucide-react";
+import { Loader2, Lock } from "lucide-react";
+import type { ApiResponse, UserDto } from "@/types";
 
 const profileSchema = z.object({
   firstName: z.string().min(1, "Required"),
@@ -22,9 +24,8 @@ const profileSchema = z.object({
 type ProfileFormData = z.infer<typeof profileSchema>;
 
 export default function SettingsPage() {
-  const { user } = useAuth();
-  const [saved, setSaved] = useState(false);
-  const [serverError, setServerError] = useState<string | null>(null);
+  const user = useAuthStore((s) => s.user);
+  const setUser = useAuthStore((s) => s.setUser);
 
   const {
     register,
@@ -41,17 +42,18 @@ export default function SettingsPage() {
   });
 
   const onSubmit = async (data: ProfileFormData) => {
-    setServerError(null);
-    setSaved(false);
     try {
-      await api.put("/api/user/profile", {
+      const res = await apiClient.put<ApiResponse<UserDto>>("/user/profile", {
         firstName: data.firstName,
         lastName: data.lastName,
         company: data.company,
       });
-      setSaved(true);
+      if (res.data.success && res.data.data) {
+        setUser(res.data.data);
+      }
+      toast.success("Profile updated");
     } catch {
-      setServerError("Failed to update profile.");
+      toast.error("Failed to update profile.");
     }
   };
 
@@ -80,20 +82,16 @@ export default function SettingsPage() {
             </div>
             <div>
               <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" {...register("email")} disabled />
+              <div className="relative">
+                <Input id="email" type="email" {...register("email")} disabled className="pr-10" />
+                <Lock className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+              </div>
               <p className="mt-1 text-xs text-gray-400">Email cannot be changed.</p>
             </div>
             <div>
               <Label htmlFor="company">Company</Label>
               <Input id="company" {...register("company")} />
             </div>
-
-            {serverError && <p className="text-sm text-red-500">{serverError}</p>}
-            {saved && (
-              <p className="flex items-center gap-2 text-sm text-[#00B050]">
-                <CheckCircle className="h-4 w-4" /> Profile updated successfully
-              </p>
-            )}
 
             <Button type="submit" disabled={isSubmitting}>
               {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}

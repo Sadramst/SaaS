@@ -1,3 +1,4 @@
+// ─── Generic wrappers ───────────────────────────────────────
 export interface ApiResponse<T> {
   success: boolean;
   message?: string;
@@ -13,6 +14,7 @@ export interface PagedResult<T> {
   totalPages: number;
 }
 
+// ─── Auth ───────────────────────────────────────────────────
 export interface AuthResponse {
   token: string;
   refreshToken: string;
@@ -57,6 +59,20 @@ export interface ResetPasswordRequest {
   confirmPassword: string;
 }
 
+export interface UpdateProfileRequest {
+  firstName: string;
+  lastName: string;
+  company?: string;
+  phone?: string;
+}
+
+export interface ChangePasswordRequest {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+// ─── Waitlist ───────────────────────────────────────────────
 export interface WaitlistRequest {
   email: string;
   company?: string;
@@ -70,6 +86,7 @@ export interface WaitlistResponse {
   message: string;
 }
 
+// ─── Blog ───────────────────────────────────────────────────
 export interface BlogPostDto {
   id: string;
   title: string;
@@ -84,6 +101,9 @@ export interface BlogPostDto {
   tags: string[];
 }
 
+export type BlogPost = BlogPostDto;
+
+// ─── Contact ────────────────────────────────────────────────
 export interface ContactRequest {
   name: string;
   email: string;
@@ -91,19 +111,8 @@ export interface ContactRequest {
   subject?: string;
   message: string;
 }
-export interface UpdateProfileRequest {
-  firstName: string;
-  lastName: string;
-  company?: string;
-  phone?: string;
-}
 
-export interface ChangePasswordRequest {
-  currentPassword: string;
-  newPassword: string;
-  confirmPassword: string;
-}
-
+// ─── Subscriptions & Billing ────────────────────────────────
 export interface SubscriptionInfo {
   plan: string;
   status: string;
@@ -122,6 +131,17 @@ export interface PlanDto {
   cta: string;
 }
 
+export interface PricingTier {
+  name: string;
+  price: number;
+  annualPrice: number;
+  description: string;
+  features: string[];
+  isPopular: boolean;
+  cta: string;
+}
+
+// ─── Visuals ────────────────────────────────────────────────
 export interface Visual {
   id: string;
   name: string;
@@ -142,16 +162,7 @@ export interface VisualDetailDto extends Visual {
   dataRequirements: string;
 }
 
-export interface ContactRequest {
-  name: string;
-  email: string;
-  company?: string;
-  subject?: string;
-  message: string;
-}
-
-export type BlogPost = BlogPostDto;
-
+// ─── Marketing page types ───────────────────────────────────
 export interface FAQItem {
   question: string;
   answer: string;
@@ -165,12 +176,14 @@ export interface Feature {
   longDescription?: string[];
 }
 
-export interface PricingTier {
+// ─── Platform modules ───────────────────────────────────────
+export interface PlatformModule {
+  id: string;
   name: string;
-  price: number;
-  annualPrice: number;
+  shortName: string;
   description: string;
+  icon: string;
+  color: string;
   features: string[];
-  isPopular: boolean;
-  cta: string;
+  requiredPlan: string;
 }
